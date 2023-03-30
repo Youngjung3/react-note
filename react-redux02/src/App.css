@@ -1,0 +1,6 @@
+body{text-align: center;}
+.items{
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+}
