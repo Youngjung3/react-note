@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>객체 구조분해할당</h1>
+    <script>
+        const mango={
+            name:'망고',
+            age:'5',
+            play:"휴지뽑기",
+        }
+        // 기존
+        // var name=mango.name;
+        // var age=mango.age;
+        var {age,play,name}=mango;
+        console.log(name,play,age);
+    </script>
+
+    <h1>배열 구조분해할당</h1>
+    <script>
+        const dogs=["망고","딴딴","공주"];
+/*         var dog0=dogs[0];
+        var dog1=dogs[1];
+        var dog2=dogs[2]; */
+        var [dog2,dog1,dog0]=dogs;
+
+        console.log(dog0, dog1, dog2);
+    </script>
+</body>
+</html>

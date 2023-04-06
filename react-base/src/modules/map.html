@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let cats=['땅콩이', '얼룩이', '회색이'];
+        cats=cats.map((o,i)=>{
+            return o+"밥먹자~!🐔";
+        })
+        console.log(cats);
+        cats.forEach((o)=>{
+            // alert(o)
+        })
+
+        let numbers=[273,52,4,984,68];
+        numbers=numbers.map((value)=>{
+            return value*value;
+        });
+        numbers.forEach(console.log)
+
+        const dogs=['망고','공주,','딴딴'];
+        const like=dogs.map((value)=>{
+            return "♡"+value;
+        })
+        console.log(like);
+    </script>
+</body>
+</html>
