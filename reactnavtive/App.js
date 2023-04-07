@@ -8,8 +8,12 @@ import {
   Image,
   ScrollView,
   SafeAreaView,
+  Dimensions,
+  TouchableOpacity,
+  Alert
 } from "react-native";
-import { API_URL } from "./config/constans";
+import { API_URL } from "./config/constants";
+import Carousel from "react-native-anchor-carousel";
 import dayjs from "dayjs";
 
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -21,6 +25,15 @@ dayjs.locale("ko");
 export default function App() {
   const [products, setProducts] = useState([]);
   const [banners, setBanners] = useState([]);
+  const PAGE_WIDTH= Dimensions.get("window").width;
+  const baseOptions=({
+    width : PAGE_WIDTH / 2,
+    height : PAGE_WIDTH /2,
+    style:{
+      width:PAGE_WIDTH
+    },
+  })
+
   useEffect(() => {
     axios
       .get(`${API_URL}/products`)
@@ -42,21 +55,33 @@ export default function App() {
   }, []);
   // console.log(products);
   return (
-    <View style={styles.container}>
-      <SafeAreaView>
+    <SafeAreaView>
         <StatusBar style="auto" />
         <ScrollView>
-          <View style={styles.banners}>
-            {banners.map((banner, index) => {
-              return (
+        <View style={styles.container}>
+          <TouchableOpacity onPress={()=>{
+            Alert.alert("배너클릭");
+          }}>
+            <Carousel
+            {...baseOptions}
+              width={Dimensions.get("window").width}
+              height={300}
+              autoPlay={true}
+              autoPlayInterval={2000}
+              sliderWidth={Dimensions.get("window").width}
+              itemWidth={Dimensions.get("window").width}
+              itemHeight={300}
+              data={banners}
+              renderItem={(banner) => {
+                return (
                 <Image
-                  source={{ uri: `${API_URL}/${banner.imageUrl}` }}
+                  source={{ uri: `${API_URL}/${banner.item.imageUrl}` }}
                   style={styles.bannerImage}
-                  key={banner.id}
                 />
-              );
-            })}
-          </View>
+                )
+              }}
+            />
+          </TouchableOpacity>
           <Text>products</Text>
           {products &&
             products.map((product, index) => {
@@ -94,9 +119,9 @@ export default function App() {
                 </View>
               );
             })}
+            </View>
         </ScrollView>
       </SafeAreaView>
-    </View>
   );
 }
 
@@ -104,6 +129,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "skyblue",
+    position: "relative",
   },
   productCard: {
     width: 320,
@@ -160,16 +186,6 @@ const styles = StyleSheet.create({
   bannerImage: {
     width: "100%",
     height: "100%",
-    position: "absolute",
-    top: 0,
-    left: 0,
-    // resizeMode:'cover',
   },
-  banners: {
-    width: "100%",
-    height: 300,
-    position: "relative",
-    top: 0,
-    left: 0,
-  },
+
 });
